@@ -37,3 +37,21 @@ class Enemy(Character):
   
   def show_info(self):
     return f"{super().show_info()}\nType: {self.get_type()}\n"
+
+class Game:
+  def __init__(self) -> None:
+    self.hero = Hero("HeroName", 100, 5, "Super Strength")
+    self.enemy = Enemy("EnemyName", 80, 3, "Flying")
+  
+  def start(self):
+    print("Game Started!")
+    while self.hero.get_life() > 0 and self.enemy.get_life() > 0:
+      print("\nCharacters info:")
+      print(self.hero.show_info())
+      print(self.enemy.show_info())
+
+      input("Press Enter to continue...")
+      attack_choice = input("Press 1 to normal attack, or 2 to use skill: ")
+
+game = Game()
+game.start()
