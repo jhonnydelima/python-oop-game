@@ -15,6 +15,19 @@ class Character:
   
   def show_info(self):
     return f"Name: {self.get_name()}\nLife: {self.get_life()}\nLevel: {self.get_level()}"
+  
+  def attack(self, target):
+    if self.get_life() > 0:
+      damage = self.get_level() * 2
+      target.take_damage(damage)
+      print(f"\n{self.get_name()} attacks {target.get_name()} and causes {damage} of damage!")
+    else:
+      print(f"\n{self.get_name()} cannot attack because they have no life left.")
+  
+  def take_damage(self, damage):
+    self.__life -= damage
+    if self.__life < 0:
+      self.__life = 0
 
 class Hero(Character):
   def __init__(self, name, life, level, skill) -> None:
@@ -52,6 +65,16 @@ class Game:
 
       input("Press Enter to continue...")
       attack_choice = input("Press 1 to normal attack, or 2 to use skill: ")
+
+      if attack_choice == '1':
+        self.hero.attack(self.enemy)
+      else:
+        print("\nInvalid choice. Please try again.")
+    
+    if self.hero.get_life() > 0:
+      print(f"\n{self.hero.get_name()} wins!")
+    else:
+      print(f"\n{self.enemy.get_name()} wins!")
 
 game = Game()
 game.start()
