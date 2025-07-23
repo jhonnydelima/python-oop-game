@@ -39,6 +39,11 @@ class Hero(Character):
   
   def show_info(self):
     return f"{super().show_info()}\nSkill: {self.get_skill()}\n"
+  
+  def use_skill(self, target):
+    damage = self.get_level() * 5
+    target.take_damage(damage)
+    print(f"\n{self.get_name()} uses skill '{self.get_skill()}' on {target.get_name()} and causes {damage} of damage!")
 
 class Enemy(Character):
   def __init__(self, name, life, level, type) -> None:
@@ -68,6 +73,8 @@ class Game:
 
       if attack_choice == '1':
         self.hero.attack(self.enemy)
+      elif attack_choice == '2':
+        self.hero.use_skill(self.enemy)
       else:
         print("\nInvalid choice. Please try again.")
     
