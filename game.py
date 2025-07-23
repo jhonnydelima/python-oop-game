@@ -1,3 +1,5 @@
+import random
+
 class Character:
   def __init__(self, name, life, level) -> None:
     self.__name = name
@@ -17,12 +19,9 @@ class Character:
     return f"Name: {self.get_name()}\nLife: {self.get_life()}\nLevel: {self.get_level()}"
   
   def attack(self, target):
-    if self.get_life() > 0:
-      damage = self.get_level() * 2
-      target.take_damage(damage)
-      print(f"\n{self.get_name()} attacks {target.get_name()} and causes {damage} of damage!")
-    else:
-      print(f"\n{self.get_name()} cannot attack because they have no life left.")
+    damage = random.randint(self.get_level() * 2, self.get_level() * 4)
+    target.take_damage(damage)
+    print(f"\n{self.get_name()} attacks {target.get_name()} and causes {damage} of damage!")
   
   def take_damage(self, damage):
     self.__life -= damage
@@ -41,7 +40,7 @@ class Hero(Character):
     return f"{super().show_info()}\nSkill: {self.get_skill()}\n"
   
   def use_skill(self, target):
-    damage = self.get_level() * 5
+    damage = random.randint(self.get_level() * 5, self.get_level() * 8)
     target.take_damage(damage)
     print(f"\n{self.get_name()} uses skill '{self.get_skill()}' on {target.get_name()} and causes {damage} of damage!")
 
