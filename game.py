@@ -77,6 +77,9 @@ class Game:
         self.hero.use_skill(self.enemy)
       else:
         print("\nInvalid choice. Please try again.")
+
+      if self.enemy.get_life() > 0:
+        self.enemy.attack(self.hero)
     
     if self.hero.get_life() > 0:
       print(f"\n{self.hero.get_name()} wins!")
